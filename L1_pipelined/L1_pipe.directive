@@ -1,0 +1,18 @@
+<AutoPilot:ProjectResources xmlns:AutoPilot="com.autoesl.autopilot.ui.directiveView">
+    <sourceFile name="">
+        <directive functionName="FFT" label="" functionLabel="">
+            <pragma name="TOP">
+                <option name="name" value="FFT"/>
+            </pragma>
+        </directive>
+        <directive functionName="FFT_stage" label="FFT_loop1" functionLabel="">
+            <pragma name="PIPELINE"/>
+        </directive>
+        <directive functionName="FFT" label="" functionLabel="">
+            <pragma name="TOP">
+                <option name="name" value="FFT"/>
+            </pragma>
+        </directive>
+    </sourceFile>
+</AutoPilot:ProjectResources>
+

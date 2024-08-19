@@ -1,0 +1,225 @@
+
+
+================================================================
+== Vitis HLS Report for 'FFT'
+================================================================
+* Date:           Sun Apr 28 11:18:52 2024
+
+* Version:        2023.2 (Build 4023990 on Oct 11 2023)
+* Project:        32pt_fft
+* Solution:       L2_pipe (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg484-3
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.186 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |      146|      146|  1.460 us|  1.460 us|  147|  147|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +-----------------------------------------------+-------------------------------------+---------+---------+----------+----------+-----+-----+---------+
+        |                                               |                                     |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+        |                    Instance                   |                Module               |   min   |   max   |    min   |    max   | min | max |   Type  |
+        +-----------------------------------------------+-------------------------------------+---------+---------+----------+----------+-----+-----+---------+
+        |grp_FFT_Pipeline_FFT_label_bit_reversal_fu_62  |FFT_Pipeline_FFT_label_bit_reversal  |       35|       35|  0.350 us|  0.350 us|   35|   35|       no|
+        |grp_FFT_Pipeline_FFT_loop1_fu_74               |FFT_Pipeline_FFT_loop1               |       18|       18|  0.180 us|  0.180 us|   18|   18|       no|
+        |grp_FFT_stage_1_fu_86                          |FFT_stage_1                          |       19|       19|  0.190 us|  0.190 us|   19|   19|       no|
+        |grp_FFT_stage_2_fu_98                          |FFT_stage_2                          |       21|       21|  0.210 us|  0.210 us|   21|   21|       no|
+        |grp_FFT_stage_3_fu_110                         |FFT_stage_3                          |       21|       21|  0.210 us|  0.210 us|   21|   21|       no|
+        |grp_FFT_stage_4_fu_126                         |FFT_stage_4                          |       21|       21|  0.210 us|  0.210 us|   21|   21|       no|
+        +-----------------------------------------------+-------------------------------------+---------+---------+----------+----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       -|      -|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        0|   12|     919|   1627|    -|
+|Memory           |        0|    -|     320|     80|    0|
+|Multiplexer      |        -|    -|       -|    701|    -|
+|Register         |        -|    -|      18|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|   12|    1257|   2408|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      280|  220|  106400|  53200|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|    5|       1|      4|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +-----------------------------------------------+-------------------------------------+---------+----+-----+-----+-----+
+    |                    Instance                   |                Module               | BRAM_18K| DSP|  FF | LUT | URAM|
+    +-----------------------------------------------+-------------------------------------+---------+----+-----+-----+-----+
+    |grp_FFT_Pipeline_FFT_label_bit_reversal_fu_62  |FFT_Pipeline_FFT_label_bit_reversal  |        0|   0|   28|   69|    0|
+    |grp_FFT_Pipeline_FFT_loop1_fu_74               |FFT_Pipeline_FFT_loop1               |        0|   0|   16|  162|    0|
+    |grp_FFT_stage_1_fu_86                          |FFT_stage_1                          |        0|   0|   69|  466|    0|
+    |grp_FFT_stage_2_fu_98                          |FFT_stage_2                          |        0|   4|  261|  357|    0|
+    |grp_FFT_stage_3_fu_110                         |FFT_stage_3                          |        0|   4|  278|  328|    0|
+    |grp_FFT_stage_4_fu_126                         |FFT_stage_4                          |        0|   4|  267|  245|    0|
+    +-----------------------------------------------+-------------------------------------+---------+----+-----+-----+-----+
+    |Total                                          |                                     |        0|  12|  919| 1627|    0|
+    +-----------------------------------------------+-------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    +--------------------+--------------------------------+---------+----+----+-----+------+-----+------+-------------+
+    |       Memory       |             Module             | BRAM_18K| FF | LUT| URAM| Words| Bits| Banks| W*Bits*Banks|
+    +--------------------+--------------------------------+---------+----+----+-----+------+-----+------+-------------+
+    |after_rev_M_real_U  |after_rev_M_real_RAM_AUTO_1R1W  |        0|  32|   8|    0|    32|   16|     1|          512|
+    |after_rev_M_imag_U  |after_rev_M_real_RAM_AUTO_1R1W  |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s1_M_real_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s1_M_imag_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s2_M_real_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s2_M_imag_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s3_M_real_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s3_M_imag_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s4_M_real_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    |s4_M_imag_U         |s1_M_real_RAM_AUTO_1R1W         |        0|  32|   8|    0|    32|   16|     1|          512|
+    +--------------------+--------------------------------+---------+----+----+-----+------+-----+------+-------------+
+    |Total               |                                |        0| 320|  80|    0|   320|  160|    10|         5120|
+    +--------------------+--------------------------------+---------+----+----+-----+------+-----+------+-------------+
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    N/A
+
+    * Multiplexer: 
+    +---------------------------+----+-----------+-----+-----------+
+    |            Name           | LUT| Input Size| Bits| Total Bits|
+    +---------------------------+----+-----------+-----+-----------+
+    |after_rev_M_imag_address0  |  13|          3|    5|         15|
+    |after_rev_M_imag_ce0       |  13|          3|    1|          3|
+    |after_rev_M_imag_ce1       |   9|          2|    1|          2|
+    |after_rev_M_imag_we0       |   9|          2|    1|          2|
+    |after_rev_M_real_address0  |  13|          3|    5|         15|
+    |after_rev_M_real_ce0       |  13|          3|    1|          3|
+    |after_rev_M_real_ce1       |   9|          2|    1|          2|
+    |after_rev_M_real_we0       |   9|          2|    1|          2|
+    |ap_NS_fsm                  |  53|         13|    1|         13|
+    |s1_M_imag_address0         |  13|          3|    5|         15|
+    |s1_M_imag_address1         |  13|          3|    5|         15|
+    |s1_M_imag_ce0              |  13|          3|    1|          3|
+    |s1_M_imag_ce1              |  13|          3|    1|          3|
+    |s1_M_imag_we0              |   9|          2|    1|          2|
+    |s1_M_imag_we1              |   9|          2|    1|          2|
+    |s1_M_real_address0         |  13|          3|    5|         15|
+    |s1_M_real_address1         |  13|          3|    5|         15|
+    |s1_M_real_ce0              |  13|          3|    1|          3|
+    |s1_M_real_ce1              |  13|          3|    1|          3|
+    |s1_M_real_we0              |   9|          2|    1|          2|
+    |s1_M_real_we1              |   9|          2|    1|          2|
+    |s2_M_imag_address0         |  13|          3|    5|         15|
+    |s2_M_imag_address1         |  13|          3|    5|         15|
+    |s2_M_imag_ce0              |  13|          3|    1|          3|
+    |s2_M_imag_ce1              |  13|          3|    1|          3|
+    |s2_M_imag_we0              |   9|          2|    1|          2|
+    |s2_M_imag_we1              |   9|          2|    1|          2|
+    |s2_M_real_address0         |  13|          3|    5|         15|
+    |s2_M_real_address1         |  13|          3|    5|         15|
+    |s2_M_real_ce0              |  13|          3|    1|          3|
+    |s2_M_real_ce1              |  13|          3|    1|          3|
+    |s2_M_real_we0              |   9|          2|    1|          2|
+    |s2_M_real_we1              |   9|          2|    1|          2|
+    |s3_M_imag_address0         |  13|          3|    5|         15|
+    |s3_M_imag_address1         |  13|          3|    5|         15|
+    |s3_M_imag_ce0              |  13|          3|    1|          3|
+    |s3_M_imag_ce1              |  13|          3|    1|          3|
+    |s3_M_imag_we0              |   9|          2|    1|          2|
+    |s3_M_imag_we1              |   9|          2|    1|          2|
+    |s3_M_real_address0         |  13|          3|    5|         15|
+    |s3_M_real_address1         |  13|          3|    5|         15|
+    |s3_M_real_ce0              |  13|          3|    1|          3|
+    |s3_M_real_ce1              |  13|          3|    1|          3|
+    |s3_M_real_we0              |   9|          2|    1|          2|
+    |s3_M_real_we1              |   9|          2|    1|          2|
+    |s4_M_imag_address0         |  13|          3|    5|         15|
+    |s4_M_imag_address1         |  13|          3|    5|         15|
+    |s4_M_imag_ce0              |  13|          3|    1|          3|
+    |s4_M_imag_ce1              |  13|          3|    1|          3|
+    |s4_M_imag_we0              |   9|          2|    1|          2|
+    |s4_M_imag_we1              |   9|          2|    1|          2|
+    |s4_M_real_address0         |  13|          3|    5|         15|
+    |s4_M_real_address1         |  13|          3|    5|         15|
+    |s4_M_real_ce0              |  13|          3|    1|          3|
+    |s4_M_real_ce1              |  13|          3|    1|          3|
+    |s4_M_real_we0              |   9|          2|    1|          2|
+    |s4_M_real_we1              |   9|          2|    1|          2|
+    +---------------------------+----+-----------+-----+-----------+
+    |Total                      | 701|        161|  129|        377|
+    +---------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +------------------------------------------------------------+----+----+-----+-----------+
+    |                            Name                            | FF | LUT| Bits| Const Bits|
+    +------------------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                                   |  12|   0|   12|          0|
+    |grp_FFT_Pipeline_FFT_label_bit_reversal_fu_62_ap_start_reg  |   1|   0|    1|          0|
+    |grp_FFT_Pipeline_FFT_loop1_fu_74_ap_start_reg               |   1|   0|    1|          0|
+    |grp_FFT_stage_1_fu_86_ap_start_reg                          |   1|   0|    1|          0|
+    |grp_FFT_stage_2_fu_98_ap_start_reg                          |   1|   0|    1|          0|
+    |grp_FFT_stage_3_fu_110_ap_start_reg                         |   1|   0|    1|          0|
+    |grp_FFT_stage_4_fu_126_ap_start_reg                         |   1|   0|    1|          0|
+    +------------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                       |  18|   0|   18|          0|
+    +------------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------+-----+-----+------------+--------------+--------------+
+|     RTL Ports     | Dir | Bits|  Protocol  | Source Object|    C Type    |
++-------------------+-----+-----+------------+--------------+--------------+
+|ap_clk             |   in|    1|  ap_ctrl_hs|           FFT|  return value|
+|ap_rst             |   in|    1|  ap_ctrl_hs|           FFT|  return value|
+|ap_start           |   in|    1|  ap_ctrl_hs|           FFT|  return value|
+|ap_done            |  out|    1|  ap_ctrl_hs|           FFT|  return value|
+|ap_idle            |  out|    1|  ap_ctrl_hs|           FFT|  return value|
+|ap_ready           |  out|    1|  ap_ctrl_hs|           FFT|  return value|
+|data_IN_address0   |  out|    5|   ap_memory|       data_IN|         array|
+|data_IN_ce0        |  out|    1|   ap_memory|       data_IN|         array|
+|data_IN_q0         |   in|   32|   ap_memory|       data_IN|         array|
+|data_OUT_address0  |  out|    5|   ap_memory|      data_OUT|         array|
+|data_OUT_ce0       |  out|    1|   ap_memory|      data_OUT|         array|
+|data_OUT_we0       |  out|    1|   ap_memory|      data_OUT|         array|
+|data_OUT_d0        |  out|   32|   ap_memory|      data_OUT|         array|
+|data_OUT_address1  |  out|    5|   ap_memory|      data_OUT|         array|
+|data_OUT_ce1       |  out|    1|   ap_memory|      data_OUT|         array|
+|data_OUT_we1       |  out|    1|   ap_memory|      data_OUT|         array|
+|data_OUT_d1        |  out|   32|   ap_memory|      data_OUT|         array|
++-------------------+-----+-----+------------+--------------+--------------+
+

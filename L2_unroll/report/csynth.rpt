@@ -1,0 +1,204 @@
+
+
+================================================================
+== Synthesis Summary Report of 'FFT'
+================================================================
++ General Information: 
+    * Date:           Sun Apr 28 11:18:52 2024
+    * Version:        2023.2 (Build 4023990 on Oct 11 2023)
+    * Project:        32pt_fft
+    * Solution:       L2_pipe (Vivado IP Flow Target)
+    * Product family: zynq
+    * Target device:  xc7z020-clg484-3
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +----------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+---------+-----------+-----------+-----+
+    |                 Modules                | Issue|      | Latency |  Latency  | Iteration|         | Trip |          |      |         |           |           |     |
+    |                 & Loops                | Type | Slack| (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined| BRAM |   DSP   |     FF    |    LUT    | URAM|
+    +----------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+---------+-----------+-----------+-----+
+    |+ FFT                                   |     -|  0.11|      146|  1.460e+03|         -|      147|     -|        no|     -|  12 (5%)|  1257 (1%)|  2408 (4%)|    -|
+    | + FFT_Pipeline_FFT_label_bit_reversal  |     -|  3.32|       35|    350.000|         -|       35|     -|        no|     -|        -|   28 (~0%)|   69 (~0%)|    -|
+    |  o FFT_label_bit_reversal              |     -|  7.30|       33|    330.000|         3|        1|    32|       yes|     -|        -|          -|          -|    -|
+    | + FFT_Pipeline_FFT_loop1               |     -|  2.53|       18|    180.000|         -|       18|     -|        no|     -|        -|   16 (~0%)|  162 (~0%)|    -|
+    |  o FFT_loop1                           |     -|  7.30|       16|    160.000|         2|        1|    16|       yes|     -|        -|          -|          -|    -|
+    | + FFT_stage_1                          |     -|  0.98|       19|    190.000|         -|       19|     -|        no|     -|        -|   69 (~0%)|  466 (~0%)|    -|
+    |  o FFT_loop1_FFT_loop2                 |     -|  7.30|       17|    170.000|         3|        1|    16|       yes|     -|        -|          -|          -|    -|
+    | + FFT_stage_2                          |     -|  1.15|       21|    210.000|         -|       21|     -|        no|     -|   4 (1%)|  261 (~0%)|  357 (~0%)|    -|
+    |  o FFT_loop1_FFT_loop2                 |     -|  7.30|       19|    190.000|         5|        1|    16|       yes|     -|        -|          -|          -|    -|
+    | + FFT_stage_3                          |     -|  0.98|       21|    210.000|         -|       21|     -|        no|     -|   4 (1%)|  278 (~0%)|  328 (~0%)|    -|
+    |  o FFT_loop1_FFT_loop2                 |     -|  7.30|       19|    190.000|         5|        1|    16|       yes|     -|        -|          -|          -|    -|
+    | + FFT_stage_4                          |     -|  0.11|       21|    210.000|         -|       21|     -|        no|     -|   4 (1%)|  267 (~0%)|  245 (~0%)|    -|
+    |  o FFT_loop2                           |     -|  7.30|       19|    190.000|         5|        1|    16|       yes|     -|        -|          -|          -|    -|
+    +----------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+---------+-----------+-----------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* AP_MEMORY
++-------------------+-----------+----------+
+| Port              | Direction | Bitwidth |
++-------------------+-----------+----------+
+| data_IN_address0  | out       | 5        |
+| data_IN_q0        | in        | 32       |
+| data_OUT_address0 | out       | 5        |
+| data_OUT_address1 | out       | 5        |
+| data_OUT_d0       | out       | 32       |
+| data_OUT_d1       | out       | 32       |
++-------------------+-----------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+------------------------------------------------+
+| Argument | Direction | Datatype                                       |
++----------+-----------+------------------------------------------------+
+| data_IN  | in        | complex<ap_fixed<16, 8, AP_TRN, AP_WRAP, 0> >* |
+| data_OUT | out       | complex<ap_fixed<16, 8, AP_TRN, AP_WRAP, 0> >* |
++----------+-----------+------------------------------------------------+
+
+* SW-to-HW Mapping
++----------+-------------------+---------+----------+
+| Argument | HW Interface      | HW Type | HW Usage |
++----------+-------------------+---------+----------+
+| data_IN  | data_IN_address0  | port    | offset   |
+| data_IN  | data_IN_ce0       | port    |          |
+| data_IN  | data_IN_q0        | port    |          |
+| data_OUT | data_OUT_address0 | port    | offset   |
+| data_OUT | data_OUT_ce0      | port    |          |
+| data_OUT | data_OUT_we0      | port    |          |
+| data_OUT | data_OUT_d0       | port    |          |
+| data_OUT | data_OUT_address1 | port    | offset   |
+| data_OUT | data_OUT_ce1      | port    |          |
+| data_OUT | data_OUT_we1      | port    |          |
+| data_OUT | data_OUT_d1       | port    |          |
++----------+-------------------+---------+----------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++----------------------------------------+-----+--------+---------------+-----+-----------+---------+
+| Name                                   | DSP | Pragma | Variable      | Op  | Impl      | Latency |
++----------------------------------------+-----+--------+---------------+-----+-----------+---------+
+| + FFT                                  | 12  |        |               |     |           |         |
+|  + FFT_Pipeline_FFT_label_bit_reversal | 0   |        |               |     |           |         |
+|    add_ln39_fu_114_p2                  |     |        | add_ln39      | add | fabric    | 0       |
+|  + FFT_Pipeline_FFT_loop1              | 0   |        |               |     |           |         |
+|    add_ln22_fu_152_p2                  |     |        | add_ln22      | add | fabric    | 0       |
+|    s1_M_real_d1                        |     |        | p_r_M_real_9  | add | fabric    | 0       |
+|    s1_M_imag_d1                        |     |        | p_r_M_imag_9  | add | fabric    | 0       |
+|    s1_M_real_d0                        |     |        | p_r_M_real_10 | sub | fabric    | 0       |
+|    s1_M_imag_d0                        |     |        | p_r_M_imag_10 | sub | fabric    | 0       |
+|  + FFT_stage_1                         | 0   |        |               |     |           |         |
+|    add_ln22_fu_196_p2                  |     |        | add_ln22      | add | fabric    | 0       |
+|    add_ln22_3_fu_222_p2                |     |        | add_ln22_3    | add | fabric    | 0       |
+|    add_ln27_fu_252_p2                  |     |        | add_ln27      | add | fabric    | 0       |
+|    sub_ln389_1_fu_313_p2               |     |        | sub_ln389_1   | sub | fabric    | 0       |
+|    sub_ln389_fu_326_p2                 |     |        | sub_ln389     | sub | fabric    | 0       |
+|    sub_ln389_2_fu_349_p2               |     |        | sub_ln389_2   | sub | fabric    | 0       |
+|    add_ln389_fu_362_p2                 |     |        | add_ln389     | add | fabric    | 0       |
+|    s2_M_real_d1                        |     |        | p_r_M_real_7  | add | fabric    | 0       |
+|    s2_M_imag_d1                        |     |        | p_r_M_imag_7  | add | fabric    | 0       |
+|    s2_M_real_d0                        |     |        | p_r_M_real_8  | sub | fabric    | 0       |
+|    s2_M_imag_d0                        |     |        | p_r_M_imag_8  | sub | fabric    | 0       |
+|    add_ln23_fu_264_p2                  |     |        | add_ln23      | add | fabric    | 0       |
+|  + FFT_stage_2                         | 4   |        |               |     |           |         |
+|    add_ln22_fu_204_p2                  |     |        | add_ln22      | add | fabric    | 0       |
+|    add_ln22_2_fu_230_p2                |     |        | add_ln22_2    | add | fabric    | 0       |
+|    add_ln27_fu_260_p2                  |     |        | add_ln27      | add | fabric    | 0       |
+|    mul_16s_10s_24_1_1_U15              | 1   |        | mul_ln389     | mul | auto      | 0       |
+|    mac_mulsub_16s_9s_24s_24_4_1_U17    | 1   |        | mul_ln389_7   | mul | dsp_slice | 3       |
+|    mac_mulsub_16s_9s_24s_24_4_1_U17    | 1   |        | sub_ln389     | sub | dsp_slice | 3       |
+|    mul_16s_10s_24_1_1_U16              | 1   |        | mul_ln389_8   | mul | auto      | 0       |
+|    mac_muladd_16s_9s_24s_24_4_1_U18    | 1   |        | mul_ln389_9   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_9s_24s_24_4_1_U18    | 1   |        | add_ln389     | add | dsp_slice | 3       |
+|    s3_M_real_d1                        |     |        | p_r_M_real_5  | add | fabric    | 0       |
+|    s3_M_imag_d1                        |     |        | p_r_M_imag_5  | add | fabric    | 0       |
+|    s3_M_real_d0                        |     |        | p_r_M_real_6  | sub | fabric    | 0       |
+|    s3_M_imag_d0                        |     |        | p_r_M_imag_6  | sub | fabric    | 0       |
+|    add_ln23_fu_272_p2                  |     |        | add_ln23      | add | fabric    | 0       |
+|  + FFT_stage_3                         | 4   |        |               |     |           |         |
+|    add_ln22_fu_220_p2                  |     |        | add_ln22      | add | fabric    | 0       |
+|    add_ln22_1_fu_246_p2                |     |        | add_ln22_1    | add | fabric    | 0       |
+|    add_ln27_fu_278_p2                  |     |        | add_ln27      | add | fabric    | 0       |
+|    mul_16s_10s_24_1_1_U28              | 1   |        | mul_ln389     | mul | auto      | 0       |
+|    mac_mulsub_16s_9s_24s_24_4_1_U30    | 1   |        | mul_ln389_4   | mul | dsp_slice | 3       |
+|    mac_mulsub_16s_9s_24s_24_4_1_U30    | 1   |        | sub_ln389     | sub | dsp_slice | 3       |
+|    mul_16s_10s_24_1_1_U29              | 1   |        | mul_ln389_5   | mul | auto      | 0       |
+|    mac_muladd_16s_9s_24s_24_4_1_U31    | 1   |        | mul_ln389_6   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_9s_24s_24_4_1_U31    | 1   |        | add_ln389     | add | dsp_slice | 3       |
+|    s4_M_real_d1                        |     |        | p_r_M_real_3  | add | fabric    | 0       |
+|    s4_M_imag_d1                        |     |        | p_r_M_imag_3  | add | fabric    | 0       |
+|    s4_M_real_d0                        |     |        | p_r_M_real_4  | sub | fabric    | 0       |
+|    s4_M_imag_d0                        |     |        | p_r_M_imag_4  | sub | fabric    | 0       |
+|    add_ln23_fu_290_p2                  |     |        | add_ln23      | add | fabric    | 0       |
+|  + FFT_stage_4                         | 4   |        |               |     |           |         |
+|    add_ln23_fu_167_p2                  |     |        | add_ln23      | add | fabric    | 0       |
+|    mul_16s_10s_24_1_1_U38              | 1   |        | mul_ln389     | mul | auto      | 0       |
+|    mac_mulsub_16s_9s_24s_24_4_1_U40    | 1   |        | mul_ln389_1   | mul | dsp_slice | 3       |
+|    mac_mulsub_16s_9s_24s_24_4_1_U40    | 1   |        | sub_ln389     | sub | dsp_slice | 3       |
+|    mul_16s_10s_24_1_1_U39              | 1   |        | mul_ln389_2   | mul | auto      | 0       |
+|    mac_muladd_16s_9s_24s_24_4_1_U41    | 1   |        | mul_ln389_3   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_9s_24s_24_4_1_U41    | 1   |        | add_ln389     | add | dsp_slice | 3       |
+|    p_r_M_real_1_fu_239_p2              |     |        | p_r_M_real_1  | add | fabric    | 0       |
+|    p_r_M_imag_1_fu_245_p2              |     |        | p_r_M_imag_1  | add | fabric    | 0       |
+|    p_r_M_real_2_fu_260_p2              |     |        | p_r_M_real_2  | sub | fabric    | 0       |
+|    p_r_M_imag_2_fu_266_p2              |     |        | p_r_M_imag_2  | sub | fabric    | 0       |
++----------------------------------------+-----+--------+---------------+-----+-----------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++----------------------------------------+---------+------+------+------+--------+------------------+------+---------+------------------+
+| Name                                   | Usage   | Type | BRAM | URAM | Pragma | Variable         | Impl | Latency | Bitwidth, Depth, |
+|                                        |         |      |      |      |        |                  |      |         | Banks            |
++----------------------------------------+---------+------+------+------+--------+------------------+------+---------+------------------+
+| + FFT                                  |         |      | 0    | 0    |        |                  |      |         |                  |
+|   after_rev_M_real_U                   | ram_s2p |      |      |      |        | after_rev_M_real | auto | 1       | 16, 32, 1        |
+|   after_rev_M_imag_U                   | ram_s2p |      |      |      |        | after_rev_M_imag | auto | 1       | 16, 32, 1        |
+|   s1_M_real_U                          | ram_t2p |      |      |      |        | s1_M_real        | auto | 1       | 16, 32, 1        |
+|   s1_M_imag_U                          | ram_t2p |      |      |      |        | s1_M_imag        | auto | 1       | 16, 32, 1        |
+|   s2_M_real_U                          | ram_t2p |      |      |      |        | s2_M_real        | auto | 1       | 16, 32, 1        |
+|   s2_M_imag_U                          | ram_t2p |      |      |      |        | s2_M_imag        | auto | 1       | 16, 32, 1        |
+|   s3_M_real_U                          | ram_t2p |      |      |      |        | s3_M_real        | auto | 1       | 16, 32, 1        |
+|   s3_M_imag_U                          | ram_t2p |      |      |      |        | s3_M_imag        | auto | 1       | 16, 32, 1        |
+|   s4_M_real_U                          | ram_t2p |      |      |      |        | s4_M_real        | auto | 1       | 16, 32, 1        |
+|   s4_M_imag_U                          | ram_t2p |      |      |      |        | s4_M_imag        | auto | 1       | 16, 32, 1        |
+|  + FFT_Pipeline_FFT_label_bit_reversal |         |      | 0    | 0    |        |                  |      |         |                  |
+|    rev_32_U                            | rom_1p  |      |      |      |        | rev_32           | auto | 1       | 5, 32, 1         |
+|  + FFT_stage_3                         |         |      | 0    | 0    |        |                  |      |         |                  |
+|    W4_M_real_U                         | rom_1p  |      |      |      |        | W4_M_real        | auto | 1       | 10, 8, 1         |
+|    W4_M_imag_U                         | rom_1p  |      |      |      |        | W4_M_imag        | auto | 1       | 9, 8, 1          |
+|  + FFT_stage_4                         |         |      | 0    | 0    |        |                  |      |         |                  |
+|    W5_M_real_U                         | rom_1p  |      |      |      |        | W5_M_real        | auto | 1       | 10, 16, 1        |
+|    W5_M_imag_U                         | rom_1p  |      |      |      |        | W5_M_imag        | auto | 1       | 9, 16, 1         |
++----------------------------------------+---------+------+------+------+--------+------------------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++----------+---------+------------------------------------------------+
+| Type     | Options | Location                                       |
++----------+---------+------------------------------------------------+
+| pipeline |         | 32pt_fft/L2_pipe/directives.tcl:8 in fft_stage |
++----------+---------+------------------------------------------------+
+
+

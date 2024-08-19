@@ -1,0 +1,359 @@
+
+
+================================================================
+== Vitis HLS Report for 'FFT_stage_2'
+================================================================
+* Date:           Sat Apr 27 17:51:57 2024
+
+* Version:        2023.2 (Build 4023990 on Oct 11 2023)
+* Project:        32pt_fft
+* Solution:       with_opt (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg484-3
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  5.620 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        9|        9|  90.000 ns|  90.000 ns|    9|    9|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |             |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- FFT_loop1  |        7|        7|         5|          1|          1|     4|       yes|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    4|       -|      -|    -|
+|Expression       |        -|    -|       0|    428|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        -|    2|       0|     12|    -|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       -|     36|    -|
+|Register         |        -|    -|     306|     96|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|    6|     306|    572|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      280|  220|  106400|  53200|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|    2|      ~0|      1|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +------------------------+--------------------+---------+----+---+----+-----+
+    |        Instance        |       Module       | BRAM_18K| DSP| FF| LUT| URAM|
+    +------------------------+--------------------+---------+----+---+----+-----+
+    |mul_16s_9ns_24_1_1_U23  |mul_16s_9ns_24_1_1  |        0|   1|  0|   6|    0|
+    |mul_16s_9ns_24_1_1_U24  |mul_16s_9ns_24_1_1  |        0|   1|  0|   6|    0|
+    +------------------------+--------------------+---------+----+---+----+-----+
+    |Total                   |                    |        0|   2|  0|  12|    0|
+    +------------------------+--------------------+---------+----+---+----+-----+
+
+    * DSP: 
+    +-----------------------------------+-------------------------------+----------------+
+    |              Instance             |             Module            |   Expression   |
+    +-----------------------------------+-------------------------------+----------------+
+    |am_addmul_16s_16s_9s_24_4_1_U28    |am_addmul_16s_16s_9s_24_4_1    |  (i0 + i1) * i2|
+    |am_submul_16s_16s_9s_24_4_1_U27    |am_submul_16s_16s_9s_24_4_1    |  (i0 - i1) * i2|
+    |mac_muladd_16s_8ns_24s_24_4_1_U26  |mac_muladd_16s_8ns_24s_24_4_1  |    i0 + i1 * i2|
+    |mac_muladd_16s_9s_24s_24_4_1_U25   |mac_muladd_16s_9s_24s_24_4_1   |    i0 + i1 * i2|
+    +-----------------------------------+-------------------------------+----------------+
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-------------------------+----------+----+---+----+------------+------------+
+    |      Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |add_ln22_fu_412_p2       |         +|   0|  0|  11|           3|           1|
+    |p_r_M_imag_82_fu_490_p2  |         +|   0|  0|  23|          16|          16|
+    |p_r_M_imag_91_fu_622_p2  |         +|   0|  0|  23|          16|          16|
+    |p_r_M_imag_94_fu_574_p2  |         +|   0|  0|  23|          16|          16|
+    |p_r_M_imag_fu_556_p2     |         +|   0|  0|  23|          16|          16|
+    |p_r_M_real_82_fu_484_p2  |         +|   0|  0|  23|          16|          16|
+    |p_r_M_real_91_fu_616_p2  |         +|   0|  0|  23|          16|          16|
+    |p_r_M_real_94_fu_586_p2  |         +|   0|  0|  23|          16|          16|
+    |p_r_M_real_fu_550_p2     |         +|   0|  0|  23|          16|          16|
+    |p_r_M_imag_83_fu_502_p2  |         -|   0|  0|  23|          16|          16|
+    |p_r_M_imag_92_fu_634_p2  |         -|   0|  0|  23|          16|          16|
+    |p_r_M_imag_93_fu_568_p2  |         -|   0|  0|  23|          16|          16|
+    |p_r_M_imag_95_fu_580_p2  |         -|   0|  0|  23|          16|          16|
+    |p_r_M_real_83_fu_496_p2  |         -|   0|  0|  23|          16|          16|
+    |p_r_M_real_92_fu_628_p2  |         -|   0|  0|  23|          16|          16|
+    |p_r_M_real_93_fu_562_p2  |         -|   0|  0|  23|          16|          16|
+    |p_r_M_real_95_fu_592_p2  |         -|   0|  0|  23|          16|          16|
+    |sub_ln389_11_fu_516_p2   |         -|   0|  0|  31|           1|          24|
+    |icmp_ln22_fu_406_p2      |      icmp|   0|  0|  13|           3|           4|
+    |or_ln27_fu_428_p2        |        or|   0|  0|   3|           3|           1|
+    |ap_enable_pp0            |       xor|   0|  0|   2|           1|           2|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |Total                    |          |   0|  0| 428|         267|         288|
+    +-------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +------------------------------+----+-----------+-----+-----------+
+    |             Name             | LUT| Input Size| Bits| Total Bits|
+    +------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                   |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1       |   9|          2|    1|          2|
+    |ap_sig_allocacmp_block_num_2  |   9|          2|    3|          6|
+    |block_num_fu_194              |   9|          2|    3|          6|
+    +------------------------------+----+-----------+-----+-----------+
+    |Total                         |  36|          8|    8|         16|
+    +------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +--------------------------------------+----+----+-----+-----------+
+    |                 Name                 | FF | LUT| Bits| Const Bits|
+    +--------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                             |   1|   0|    1|          0|
+    |ap_done_reg                           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1               |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2               |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3               |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4               |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg      |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter2_reg      |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter3_reg      |   1|   0|    1|          0|
+    |block_num_fu_194                      |   3|   0|    3|          0|
+    |sext_ln389_52_reg_1114                |  24|   0|   24|          0|
+    |sext_ln389_52_reg_1114_pp0_iter2_reg  |  24|   0|   24|          0|
+    |sext_ln389_reg_1108                   |  24|   0|   24|          0|
+    |sext_ln389_reg_1108_pp0_iter2_reg     |  24|   0|   24|          0|
+    |shl_ln26_reg_1075                     |   2|   0|    3|          1|
+    |trunc_ln22_reg_1071                   |   2|   0|    2|          0|
+    |zext_ln27_reg_1080                    |   2|   0|   64|         62|
+    |shl_ln26_reg_1075                     |  64|  32|    3|          1|
+    |trunc_ln22_reg_1071                   |  64|  32|    2|          0|
+    |zext_ln27_reg_1080                    |  64|  32|   64|         62|
+    +--------------------------------------+----+----+-----+-----------+
+    |Total                                 | 306|  96|  246|        126|
+    +--------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------------------------------------------------------+-----+-----+------------+-------------------------------------------------------------------+--------------+
+|                                  RTL Ports                                 | Dir | Bits|  Protocol  |                           Source Object                           |    C Type    |
++----------------------------------------------------------------------------+-----+-----+------------+-------------------------------------------------------------------+--------------+
+|ap_clk                                                                      |   in|    1|  ap_ctrl_hs|                                                        FFT_stage.2|  return value|
+|ap_rst                                                                      |   in|    1|  ap_ctrl_hs|                                                        FFT_stage.2|  return value|
+|ap_start                                                                    |   in|    1|  ap_ctrl_hs|                                                        FFT_stage.2|  return value|
+|ap_done                                                                     |  out|    1|  ap_ctrl_hs|                                                        FFT_stage.2|  return value|
+|ap_idle                                                                     |  out|    1|  ap_ctrl_hs|                                                        FFT_stage.2|  return value|
+|ap_ready                                                                    |  out|    1|  ap_ctrl_hs|                                                        FFT_stage.2|  return value|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_address0     |  out|    3|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_ce0          |  out|    1|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_q0           |   in|   16|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_address1     |  out|    3|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_ce1          |  out|    1|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_q1           |   in|   16|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_q0        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_address1  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_ce1       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_q1        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_address0   |  out|    3|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_ce0        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_q0         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_address1   |  out|    3|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_ce1        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_q1         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_q0        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_address1  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_ce1       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_q1        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_q0        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_address1  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_ce1       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_q1        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_q0        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_address1  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_ce1       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_q1        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_q0        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_address1  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_ce1       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_q1        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_q0        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_address1  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_ce1       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_q1        |   in|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3              |  out|   16|      ap_vld|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_ap_vld       |  out|    1|      ap_vld|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_19           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_19|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_19_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_19|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_16           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_16|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_16_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_16|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_20           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_20|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_20_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_20|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_17           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_17|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_17_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_17|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_21           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_21|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_21_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_21|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_18           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_18|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_18_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_18|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_22           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_22|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_22_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_22|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_47           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_47|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_47_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_47|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_51           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_51|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_51_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_51|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_48           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_48|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_48_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_48|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_52           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_52|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_52_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_52|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_49           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_49|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_49_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_49|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_53           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_53|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_53_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_53|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_50           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_50|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_50_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_50|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_54           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_54|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_54_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_54|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_23           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_23|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_23_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_23|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_27           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_27|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_27_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_27|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_24           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_24|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_24_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_24|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_28           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_28|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_28_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_28|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_25           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_25|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_25_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_25|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_29           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_29|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_29_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_29|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_26           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_26|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_26_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_26|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_30           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_30|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_30_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_30|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_55           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_55|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_55_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_55|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_59           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_59|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_59_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_59|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_56           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_56|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_56_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_56|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_60           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_60|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_60_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_60|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_57           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_57|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_57_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_57|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_61           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_61|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_61_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_61|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_58           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_58|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_58_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_58|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_62           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_62|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_62_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_62|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_31           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_31|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_31_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_31|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_35           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_35|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_35_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_35|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_32           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_32|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_32_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_32|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_36           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_36|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_36_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_36|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_33           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_33|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_33_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_33|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_37           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_37|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_37_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_37|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_34           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_34|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_34_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_34|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_38           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_38|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_38_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_38|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_63           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_63|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_63_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_63|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_67           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_67|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_67_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_67|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_64           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_64|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_64_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_64|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_68           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_68|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_68_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_68|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_65           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_65|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_65_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_65|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_69           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_69|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_69_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_69|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_66           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_66|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_66_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_66|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_70           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_70|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_70_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_70|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_39           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_39|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_39_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_39|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_43           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_43|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_43_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_43|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_40           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_40|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_40_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_40|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_44           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_44|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_44_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_44|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_41           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_41|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_41_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_41|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_45           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_45|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_45_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_45|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_42           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_42|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_42_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_42|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_46           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_46|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_46_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_46|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_71           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_71|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_71_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_71|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_75           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_75|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_75_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_75|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_72           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_72|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_72_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_72|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_76           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_76|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_76_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_76|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_73           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_73|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_73_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_73|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_77           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_77|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_77_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_77|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_74           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_74|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_74_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_74|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_78           |  out|   16|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_78|       pointer|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_78_ap_vld    |  out|    1|      ap_vld|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s3_78|       pointer|
++----------------------------------------------------------------------------+-----+-----+------------+-------------------------------------------------------------------+--------------+
+

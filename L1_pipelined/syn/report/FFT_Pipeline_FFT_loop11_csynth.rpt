@@ -1,0 +1,202 @@
+
+
+================================================================
+== Vitis HLS Report for 'FFT_Pipeline_FFT_loop11'
+================================================================
+* Date:           Sat Apr 27 17:51:57 2024
+
+* Version:        2023.2 (Build 4023990 on Oct 11 2023)
+* Project:        32pt_fft
+* Solution:       with_opt (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg484-3
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.544 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |       10|       10|  0.100 us|  0.100 us|   10|   10|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |             |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- FFT_loop1  |        8|        8|         2|          1|          1|     8|       yes|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       0|    247|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        -|    -|       -|      -|    -|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       -|     36|    -|
+|Register         |        -|    -|      11|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|    0|      11|    283|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      280|  220|  106400|  53200|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|    0|      ~0|     ~0|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------------------------------------------------------+----------+----+---+----+------------+------------+
+    |                             Variable Name                            | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------------------------------------------------------+----------+----+---+----+------------+------------+
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_d0  |         +|   0|  0|  23|          16|          16|
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_d0  |         +|   0|  0|  23|          16|          16|
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_d0   |         +|   0|  0|  23|          16|          16|
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_d0     |         +|   0|  0|  23|          16|          16|
+    |add_ln22_fu_284_p2                                                    |         +|   0|  0|  13|           4|           1|
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_d0  |         -|   0|  0|  23|          16|          16|
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_d0  |         -|   0|  0|  23|          16|          16|
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_d0  |         -|   0|  0|  23|          16|          16|
+    |FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_d0  |         -|   0|  0|  23|          16|          16|
+    |sub_ln389_fu_370_p2                                                   |         -|   0|  0|  31|           1|          24|
+    |icmp_ln22_fu_278_p2                                                   |      icmp|   0|  0|  13|           4|           5|
+    |or_ln27_fu_304_p2                                                     |        or|   0|  0|   4|           4|           1|
+    |ap_enable_pp0                                                         |       xor|   0|  0|   2|           1|           2|
+    +----------------------------------------------------------------------+----------+----+---+----+------------+------------+
+    |Total                                                                 |          |   0|  0| 247|         142|         161|
+    +----------------------------------------------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------+----+-----------+-----+-----------+
+    |            Name            | LUT| Input Size| Bits| Total Bits|
+    +----------------------------+----+-----------+-----+-----------+
+    |ap_done_int                 |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1     |   9|          2|    1|          2|
+    |ap_sig_allocacmp_block_num  |   9|          2|    4|          8|
+    |block_num_1_fu_62           |   9|          2|    4|          8|
+    +----------------------------+----+-----------+-----+-----------+
+    |Total                       |  36|          8|   10|         20|
+    +----------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+---+----+-----+-----------+
+    |           Name          | FF| LUT| Bits| Const Bits|
+    +-------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                |  1|   0|    1|          0|
+    |ap_done_reg              |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |  1|   0|    1|          0|
+    |block_num_1_fu_62        |  4|   0|    4|          0|
+    |block_num_reg_421        |  4|   0|    4|          0|
+    +-------------------------+---+----+-----+-----------+
+    |Total                    | 11|   0|   11|          0|
+    +-------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------------------------------------------------------+-----+-----+------------+-------------------------------------------------------------------+--------------+
+|                                  RTL Ports                                 | Dir | Bits|  Protocol  |                           Source Object                           |    C Type    |
++----------------------------------------------------------------------------+-----+-----+------------+-------------------------------------------------------------------+--------------+
+|ap_clk                                                                      |   in|    1|  ap_ctrl_hs|                                            FFT_Pipeline_FFT_loop11|  return value|
+|ap_rst                                                                      |   in|    1|  ap_ctrl_hs|                                            FFT_Pipeline_FFT_loop11|  return value|
+|ap_start                                                                    |   in|    1|  ap_ctrl_hs|                                            FFT_Pipeline_FFT_loop11|  return value|
+|ap_done                                                                     |  out|    1|  ap_ctrl_hs|                                            FFT_Pipeline_FFT_loop11|  return value|
+|ap_idle                                                                     |  out|    1|  ap_ctrl_hs|                                            FFT_Pipeline_FFT_loop11|  return value|
+|ap_ready                                                                    |  out|    1|  ap_ctrl_hs|                                            FFT_Pipeline_FFT_loop11|  return value|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_address0     |  out|    4|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_ce0          |  out|    1|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_q0           |   in|   16|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_address1     |  out|    4|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_ce1          |  out|    1|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_q1           |   in|   16|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7_address0   |  out|    4|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7_ce0        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7_q0         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7_address1   |  out|    4|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7_ce1        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7_q1         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_7|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6_address0   |  out|    4|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6_ce0        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6_q0         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6_address1   |  out|    4|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6_ce1        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6_q1         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_6|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8_address0   |  out|    4|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8_ce0        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8_q0         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8_address1   |  out|    4|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8_ce1        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8_q1         |   in|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s1_8|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_address0     |  out|    3|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_ce0          |  out|    1|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_we0          |  out|    1|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_d0           |  out|   16|   ap_memory|     FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_we0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10_d0        |  out|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_10|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_address0   |  out|    3|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_ce0        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_we0        |  out|    1|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9_d0         |  out|   16|   ap_memory|   FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_9|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_we0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11_d0        |  out|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_11|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_we0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12_d0        |  out|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_12|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_we0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14_d0        |  out|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_14|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_we0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13_d0        |  out|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_13|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_address0  |  out|    3|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_ce0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_we0       |  out|    1|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
+|FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15_d0        |  out|   16|   ap_memory|  FFT_complex_ap_fixed_16_8_5_3_0_complex_ap_fixed_16_8_5_3_0_s2_15|         array|
++----------------------------------------------------------------------------+-----+-----+------------+-------------------------------------------------------------------+--------------+
+
